@@ -1,0 +1,35 @@
+# Build artifacts
+/target/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Asset Forge cache
+.asset-forge-cache/
+.cache/
+
+# Build output (user's assets)
+/build/
+
+# Test files
+*.test.png
+*.test.jpg
+test_output/
+
+# Logs
+*.log
+
+# Editor backups
+*.bak
+*.orig
+
+# Cargo lock (optional - uncomment if you want to ignore it)
+# Cargo.lock
