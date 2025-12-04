@@ -77,6 +77,32 @@ pub enum Commands {
         #[command(flatten)]
         options: ModelOptions,
     },
+
+    /// Process audio files (transcode, normalize, resample)
+    Audio {
+        /// Input audio file path
+        input: PathBuf,
+
+        #[command(flatten)]
+        options: AudioOptions,
+    },
+
+    /// Show information about an asset file
+    Info {
+        /// Input file path
+        input: PathBuf,
+    },
+
+    /// Clear the build cache
+    Clean {
+        /// Cache directory (default: .cache in output dir)
+        #[arg(short, long)]
+        cache_dir: Option<PathBuf>,
+
+        /// Also remove output directory
+        #[arg(long)]
+        all: bool,
+    },
 }
 
 #[derive(Args, Clone)]
@@ -204,6 +230,49 @@ pub struct ModelOptions {
     /// Show model information without processing
     #[arg(long)]
     pub info: bool,
+}
+
+#[derive(Args, Clone)]
+pub struct AudioOptions {
+    /// Output file path
+    #[arg(short, long)]
+    pub output: Option<PathBuf>,
+
+    /// Output format (ogg, wav)
+    #[arg(short, long, default_value = "ogg")]
+    pub format: AudioOutputFormat,
+
+    /// Quality for OGG encoding (1-10, default: 5)
+    #[arg(short, long, default_value = "5")]
+    pub quality: u8,
+
+    /// Target sample rate (e.g., 44100, 48000)
+    #[arg(long)]
+    pub sample_rate: Option<u32>,
+
+    /// Normalize audio volume
+    #[arg(long)]
+    pub normalize: bool,
+
+    /// Show audio information without processing
+    #[arg(long)]
+    pub info: bool,
+}
+
+#[derive(ValueEnum, Clone, Copy, Debug, Default)]
+pub enum AudioOutputFormat {
+    #[default]
+    Ogg,
+    Wav,
+}
+
+impl std::fmt::Display for AudioOutputFormat {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            AudioOutputFormat::Ogg => write!(f, "ogg"),
+            AudioOutputFormat::Wav => write!(f, "wav"),
+        }
+    }
 }
 
 #[derive(ValueEnum, Clone, Copy, Debug, Default)]

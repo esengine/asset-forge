@@ -248,6 +248,42 @@ Options:
       --debounce <MS>     Debounce delay in milliseconds (default: 300)
 ```
 
+#### `audio`
+Process audio files (transcode, normalize, resample).
+```bash
+asset-forge audio <INPUT> [OPTIONS]
+
+Options:
+  -o, --output <PATH>     Output file path
+  -f, --format <FORMAT>   Output format (ogg, wav)
+  -q, --quality <N>       Quality level 1-10 (default: 5, for OGG)
+      --sample-rate <HZ>  Target sample rate
+      --normalize         Normalize audio volume
+      --info              Show audio information without processing
+```
+
+#### `info`
+Show information about an asset file.
+```bash
+asset-forge info <INPUT>
+
+# Displays:
+# - File size and type
+# - Image: dimensions, color type, compression ratio
+# - Model: meshes, vertices, materials, animations
+# - Audio: channels, sample rate, duration, bitrate
+```
+
+#### `clean`
+Clear the build cache.
+```bash
+asset-forge clean [OPTIONS]
+
+Options:
+  -c, --cache-dir <PATH>  Cache directory (default: .cache in output dir)
+      --all               Also remove output directory
+```
+
 ## Quality Presets
 
 | Preset | Description | Use Case |
@@ -357,4 +393,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [x] Phase 1: MVP (PNG optimization, sprite atlas, basic CLI)
 - [x] Phase 2: KTX2/Basis Universal, glTF processing, audio transcoding
 - [x] Phase 3: Meshopt compression, LOD generation, enhanced watch mode
-- [ ] Phase 4: Draco compression, GUI version, engine plugins (Bevy, Fyrox)
+- [x] Phase 4: Standalone audio/info/clean commands
+- [ ] Phase 5: Draco compression, GUI version, engine plugins (Bevy, Fyrox)

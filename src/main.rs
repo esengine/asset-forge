@@ -28,5 +28,8 @@ fn main() -> Result<()> {
         Commands::Atlas { input, options } => commands::atlas::run(input, options),
         Commands::Watch { input, options } => commands::watch::run(input, options),
         Commands::Model { input, options } => commands::model::run(input, options),
+        Commands::Audio { input, options } => commands::audio::run(input, options),
+        Commands::Info { input } => commands::info::run(input),
+        Commands::Clean { cache_dir, all } => commands::clean::run(cache_dir, all),
     }
 }

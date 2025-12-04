@@ -4,3 +4,6 @@ pub mod build;
 pub mod atlas;
 pub mod watch;
 pub mod model;
+pub mod audio;
+pub mod info;
+pub mod clean;
